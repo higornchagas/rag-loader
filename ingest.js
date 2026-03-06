@@ -180,3 +180,4 @@ run().catch((e) => {
   console.error("🔥 erro geral:", e);
   process.exit(1);
 });
+
