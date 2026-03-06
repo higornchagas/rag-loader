@@ -1,0 +1,59 @@
+[faq_coaf_reporte]
+A NoxPay realiza reporte ao COAF?
+Sim. Em conformidade com a legislação brasileira, monitoramos transações suspeitas e realizamos reportes obrigatórios aos órgãos competentes.
+
+[faq_servicos_nao_aceitos]
+Quais serviços não são aceitos?
+Não aceitamos, entre outros:
+- Dropshipping
+- Drogas
+- Armas e munições
+- Produtos ou serviços ilegais
+- Pornografia
+- Marketing multinível
+- Infoproduto
+- Apostas (incluindo loterias, jogo do bicho, jogos de azar online)
+- Qualquer produto/serviço que infrinja direitos autorais, marcas registradas ou comerciais de terceiros
+
+[faq_prazo_reembolso]
+Qual o prazo para reembolso?
+O prazo para reembolso depende da natureza da ocorrência e da etapa em que a transação se encontra.
+Em casos de fraude comprovada, golpe ou falha operacional, a devolução poderá ser realizada após análise do time de Compliance, respeitando os prazos do Mecanismo Especial de Devolução (MED), quando aplicável.
+Nos casos de desacordo comercial entre as partes, o reembolso deve ser tratado diretamente entre elas, pois a NoxPay não realiza estornos após a liquidação da operação.
+
+[faq_iof]
+Há incidência de IOF nas operações da NoxPay?
+Não.
+Os fluxos de conversão de criptomoedas processados dentro da NoxPay não estão sujeitos à incidência de IOF.
+
+[faq_imposto_ganho_capital]
+Há incidência de impostos sobre cripto durante a transação?
+Não.
+A tributação ocorre apenas quando há ganho de capital.
+Se o cliente compra a cripto pelo preço Y e utiliza pelo mesmo preço Y, não há ganho de capital nem fato gerador de imposto.
+
+[faq_modelo_regulatorio_fluxo]
+Qual é a estrutura regulatória do fluxo de pagamento?
+O modelo segue:
+1. Cliente paga a NoxPay via PIX
+2. A Nox credita BRL na conta do cliente
+3. A Nox converte o saldo em criptomoeda
+4. A criptomoeda é transferida da conta do cliente para o merchant
+
+Esse modelo garante atribuição correta conforme a IN 1.888.
+
+[faq_relatorio_in_1888_merchant]
+Os merchants precisam reportar transações com cripto conforme a IN 1.888?
+Não.
+A NoxPay é responsável por realizar todos os reportes obrigatórios à Receita Federal.
+
+[faq_documento_fiscal_cliente]
+O cliente recebe algum documento fiscal diretamente?
+Não.
+As declarações são transmitidas diretamente à Receita Federal, sem envio de documento fiscal adicional ao cliente.
+
+[faq_recebimento_cripto_evento_tributavel]
+O recebimento de criptomoeda é um evento tributável para o merchant?
+Não.
+Apenas haverá tributação caso exista venda posterior da criptomoeda com ganho de capital.
+O simples recebimento não gera fato tributável.

@@ -1,0 +1,155 @@
+[faq_crossramp_definicao]
+O que é o Crossramp da NoxPay?
+O NoxPay Crossramp é uma solução de pagamentos que converte moeda fiduciária (BRL) em criptomoedas (como USDT/USDC) utilizando o PIX como meio de pagamento.
+O fluxo é completo e integrado: identificação → cotação → pagamento PIX → liquidação → notificação via webhook.
+
+[faq_checkout_white_label]
+É possível personalizar a página de pagamento (White Label)?
+Sim. Embora o checkout padrão ocorra em ambiente seguro da noxpay.io por razões de compliance e biometria, é possível exibir o logotipo da loja e o resumo do pedido para reforçar a identidade visual do lojista.
+
+[faq_pix_bancos_compatibilidade]
+O sistema é compatível com todos os bancos brasileiros?
+Sim. Como a NoxPay opera via PIX (Sistema de Pagamentos Instantâneos do Banco Central), qualquer banco ou instituição que ofereça PIX é compatível.
+
+[faq_declaracao_contabil]
+Como o lojista deve declarar a entrada desses ativos?
+A NoxPay fornece relatórios detalhados de todas as conversões e emite Nota Fiscal referente às taxas de intermediação.
+Recomenda-se que o lojista registre como "Recebimento de Ativos Digitais via Pagamento" e utilize os extratos para conciliação contábil.
+
+[faq_receber_outros_ativos]
+Posso receber em outras criptomoedas além de USDT e USDC?
+O foco é em stablecoins.
+Ativos voláteis como BTC ou ETH podem ser avaliados mediante termos específicos de risco.
+
+[faq_taxa_custodia]
+Existe taxa de custódia para saldo parado na Dashboard?
+Não. A NoxPay não cobra taxa de custódia.
+Recomendamos saque periódico como boa prática de segurança.
+
+[faq_suporte_cliente_final]
+A NoxPay oferece suporte direto ao cliente final?
+O suporte é B2B.
+O cliente final deve contatar o lojista, que aciona a NoxPay se necessário.
+
+[faq_alteracao_cnpj]
+É possível alterar dados da conta PJ após cadastro?
+Mudanças estruturais como CNPJ ou quadro societário exigem novo processo de KYB.
+Alterações simples podem ser feitas via suporte.
+
+[faq_payout_fornecedores]
+Posso pagar fornecedores utilizando meu saldo?
+Sim. É possível utilizar o saldo via funcionalidade de Offramp/Payout.
+
+[faq_noxpay_fluxo_pagamento]
+O que é a NoxPay e como funciona o fluxo de pagamento?
+A NoxPay integra o sistema financeiro nacional (PIX) aos ativos digitais globais.
+O fluxo ocorre em 4 etapas:
+1. O usuário final lê o QR Code (com cotação fixada).
+2. Se identificado risco, pode ser solicitada biometria facial durante o fluxo.
+3. Após pagamento e validação, o saldo é creditado na Dashboard do lojista.
+4. O lojista solicita o saque quando desejar para o endereço de carteira (wallet) cadastrado.
+
+[faq_canais_atendimento]
+Quais são os canais de atendimento disponíveis para parceiros e clientes?
+A NoxPay disponibiliza canais oficiais para suporte operacional, técnico e regulatório.
+As solicitações podem ser realizadas por:
+- E-mail: atendimento@noxpay.com
+- WhatsApp: +55 11 97540-7394
+As demandas são direcionadas à área responsável para análise e acompanhamento.
+
+[faq_requisitos_operar_noxpay]
+Quais são os requisitos para que uma empresa possa operar com a NoxPay?
+Para operar com a NoxPay, a empresa deve atender aos seguintes requisitos mínimos:
+- Faturamento mensal a partir de R$ 50.000
+- Empresa constituída há mais de 6 meses
+- Quadro societário composto por sócio administrador brasileiro
+Esses critérios fazem parte da política interna de elegibilidade e análise cadastral.
+
+[faq_pf_pode_abrir_conta]
+Pessoa Física (CPF) pode abrir conta na NoxPay?
+Não.
+Aceitamos apenas empresas dentro dos critérios de elegibilidade definidos.
+
+[faq_taxas_cobradas]
+Quais são as taxas cobradas pela NoxPay?
+Trabalhamos com um modelo negociável, considerando principalmente:
+- O faturamento mensal da empresa
+- O perfil de risco do cliente
+
+Condições de referência:
+- Até R$ 100 mil/mês: taxa padrão de 2,5%
+- Acima de R$ 100 mil/mês: taxa negociável conforme volume e risco
+
+[faq_como_sacar_valor_conta]
+Como posso sacar o valor da minha conta?
+Os valores disponíveis podem ser movimentados conforme a estratégia do lojista:
+- Envio para carteira própria (wallet)
+  - Cold wallet: armazenamento offline (maior segurança)
+  - Hot wallet: carteira online (mais praticidade)
+- Envio para exchanges (ex.: Binance, Bybit, Coinbase)
+- Outras formas aplicáveis (ex.: cartão cripto, quando disponível)
+
+Antes de sacar, é importante garantir saldo suficiente para cobrir as taxas de rede.
+
+[faq_publico_alvo_noxpay]
+Para quem é o NoxPay?
+O NoxPay Crossramp é indicado para empresas que precisam integrar o PIX brasileiro a fluxos de criptoativos ou moedas múltiplas, como:
+- Exchanges e corretoras de criptomoedas
+- PSPs e gateways de pagamento
+- Plataformas SaaS e marketplaces
+- Empresas globais que vendem para ou realizam pagamentos a usuários no Brasil
+
+[faq_custodia_ativos]
+Quem é o custodiante dos ativos digitais?
+A NoxPay realiza a custódia dos ativos digitais utilizando infraestrutura segura de custódia.
+
+Após a aprovação da wallet de destino, o merchant pode solicitar o saque dos ativos digitais a qualquer momento através da Dashboard.
+
+[faq_suporte_transacoes_antigas]
+Como devem ser tratadas solicitações fora de escopo relacionadas a transações antigas de merchants?
+Quando a solicitação estiver fora do escopo operacional imediato ou relacionada a transações antigas de merchants que já estão operando normalmente, o time deve informar que a análise será realizada e o caso será tratado no próximo dia útil.
+
+Isso evita interferência nas operações em andamento do Crossramp.
+
+[faq_status_fireblocks]
+Quais são os status da Fireblocks e o que cada um significa?
+Pending = Pendente de assinatura interna.
+
+Fail = Necessita adicionar a wallet na whitelist, reprocessar a transação e depois remover a wallet da whitelist.
+
+Error = Validar se existe falta de saldo da moeda e da rede para executar a transação.
+
+[faq_minimo_transacao]
+Existem limites mínimos de transação?
+Sim.
+
+Algumas operações possuem valores mínimos para garantir viabilidade operacional e cobertura das taxas de rede blockchain.
+
+Os valores mínimos podem variar de acordo com:
+- o ativo digital
+- a rede utilizada
+- o tipo de operação (onramp ou offramp)
+
+[faq_taxas_rede_blockchain]
+Quais são as taxas de rede para saques de criptomoedas?
+As taxas de rede variam conforme a blockchain utilizada.
+
+BRL (PIX) — 0
+USDT (ERC-20) — 0,89
+USDT (AVAX C-Chain) — 0,02
+USDT (TON) — 0,07
+USDT (SOL) — 0,02
+USDC (ERC-20) — 0,89
+USDC (SOL) — 0,03
+USDC (AVAX) — 0,02
+Bitcoin (Mainnet) — 0,00000832
+USDC (Base) — 0,1
+USDC (Polygon) — 0,04
+TRON — 8,51
+AVAX C-Chain — 0,02
+TON — 0,07
+SOLANA — 0,02
+ETH (Base) — 0,00000832
+ETHER — 0,00000832
+Polygon — 0,00002
+USDT (TRX) — 2

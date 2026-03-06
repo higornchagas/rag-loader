@@ -1,0 +1,96 @@
+[faq_checkout_modelos]
+A NoxPay oferece checkout transparente e redirecionado?
+Sim. Existem dois modelos:
+1. Checkout Redirecionado (padrão): usuário é direcionado para ambiente seguro da noxpay.io.
+2. Checkout Transparente: QR Code e Pix Copia e Cola podem ser integrados diretamente no site do lojista via API.
+
+[faq_sandbox]
+Existe ambiente Sandbox para testes?
+Sim. Disponibilizamos ambiente Sandbox para simulação de pagamentos, falhas e biometria antes da entrada em produção.
+
+[faq_webhook_assinatura]
+Como é garantida a segurança dos Webhooks?
+Cada webhook enviado contém assinatura digital (HMAC) no cabeçalho.
+O lojista deve validar a assinatura utilizando sua Secret Key antes de processar o evento.
+
+[faq_plugins_ecommerce]
+Existem plugins prontos para e-commerce?
+Atualmente a integração é via API REST.
+Disponibilizamos SDKs para linguagens como Node.js, Python e PHP.
+Plugins nativos estão em desenvolvimento.
+
+[faq_webhook_retry]
+O que acontece se meu servidor de Webhook estiver offline?
+O sistema realiza retentativas automáticas em intervalos crescentes até confirmação de recebimento ou limite de tentativas.
+
+[docs_crossramp_introducao]
+O que é o Crossramp e qual a proposta do produto?
+O Crossramp permite conversão direta entre FIAT (ex.: BRL) e cripto (ex.: USDT) usando PIX como método de pagamento.
+Via API, é possível gerar links de checkout personalizados, processar KYC quando necessário, acompanhar status em tempo real e receber notificações via webhooks.
+A jornada é completa — da cotação à confirmação — com foco em segurança, transparência e usabilidade.
+
+[docs_checkout_componente_unico]
+Por que o checkout não pode ser fragmentado (somente PIX, somente cotação, etc.)?
+O checkout foi projetado como uma experiência única para garantir conformidade regulatória e manter o fluxo do usuário íntegro.
+Fragmentar partes (ex.: só PIX ou só cotação) pode quebrar o fluxo e gerar experiências interrompidas, especialmente quando há KYC, pagamento e liquidação no meio do processo.
+
+[docs_endpoint_link_retorna_url]
+O que o endpoint POST /link retorna?
+A resposta do POST /link retorna a URL do checkout gerado.
+Essa URL é usada para redirecionamento ou para incorporar (embed) o checkout na aplicação.
+
+[docs_fluxo_integracao_visao_geral]
+Qual é o fluxo de integração (visão geral) do Crossramp?
+1. Receber API Key e acesso ao Dashboard (enviado no e-mail do onboarding).
+2. Configurar um Template.
+3. Definir os processos que fazem sentido pro negócio: onramp, onramp-instant, offramp e/ou offramp-instant.
+4. Gerar o checkout chamando POST /link.
+5. Acompanhar o processo via webhooks, Dashboard e/ou métodos GET.
+Com isso, a integração fica pronta: um endpoint, múltiplos fluxos.
+
+[docs_validade_checkout_10min]
+Qual é a validade do checkout e em que momento ela deixa de se aplicar?
+O checkout tem validade de 10 minutos entre a cotação e o depósito (via PIX ou cripto).
+Após o depósito ocorrer, essa expiração deixa de ser aplicada.
+
+[docs_checkout_redirecionamento]
+Como funciona a implementação por redirecionamento para o checkout?
+1. Definir os valores (em FIAT ou Cripto) que iniciarão o checkout.
+2. Informar a URL de retorno da sua aplicação (para redirecionamento ao final).
+3. Criar o checkout via API e receber a URL do checkout.
+4. Redirecionar o usuário para essa URL (ou usar em um botão/CTA).
+5. Ao final, o usuário volta para a URL de retorno.
+
+[docs_checkout_embed_iframe]
+Como funciona a implementação incorporando (embed) o checkout?
+1. Definir os valores (em FIAT ou Cripto) que iniciarão o checkout.
+2. Criar o checkout via API e receber a URL do checkout.
+3. Incorporar a URL na sua aplicação (ex.: embed/iFrame), mantendo o checkout “inteiro” dentro do seu app.
+
+[docs_embed_boas_praticas]
+Quais boas práticas usar ao incorporar (embed) o checkout?
+- Testar layout em diferentes páginas, resoluções e tamanhos de janela.
+- Testar em múltiplos navegadores para garantir consistência.
+- Evitar tentar “extrair” partes do checkout (somente uma etapa/tela), porque isso quebra o fluxo e causa problemas de experiência.
+
+[faq_consulta_transacoes]
+Como consultar transações por cliente ou carteira?
+A Nox disponibiliza endpoints de consulta:
+- Por CPF/CNPJ
+- Por endereço de carteira
+
+Esses endpoints são úteis para suporte, conciliação e dashboards operacionais.
+
+[faq_dashboard_merchant]
+Existe um Dashboard para o merchant?
+Sim.
+O Dashboard permite:
+- Configurar Templates
+- Visualizar histórico de transações e status
+- Consultar saldos e limites
+- Analisar logs de webhooks
+
+[faq_suporte_end2end]
+Como obter suporte para uma transação específica?
+Para atendimento, compartilhe o ID end2end da transação com o time da NoxPay.
+Esse identificador localiza de forma única toda a operação.

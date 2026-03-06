@@ -1,0 +1,227 @@
+[faq_withdrawal_api]
+Existe API para automação de saques?
+Parcialmente.
+
+A API do Crossramp permite automação de saques apenas para operações de Offramp (saque em BRL via PIX).
+
+Atualmente não existe API pública para saque de ativos digitais.
+Saques de criptomoedas devem ser realizados manualmente pela Dashboard após aprovação da wallet.
+
+[faq_saques_automaticos]
+É possível configurar saques automáticos?
+Atualmente não. A funcionalidade está no roadmap, mas no momento os saques são manuais ou via API específica.
+
+[faq_refund_estorno]
+Como funciona o estorno (refund)?
+Como os ativos digitais são entregues ao lojista, o estorno deve ser gerido pelo próprio lojista.
+A NoxPay não realiza automaticamente o caminho reverso (Cripto → BRL) para evitar exposição à volatilidade.
+
+[faq_pix_agendado]
+A NoxPay aceita PIX agendado?
+Não. Para garantir cotação travada e liquidação imediata, apenas pagamentos instantâneos são aceitos.
+
+[faq_whitelist_wallet]
+É possível restringir saques para wallets autorizadas?
+Sim. É possível habilitar whitelist de endereços, permitindo saques apenas para wallets previamente aprovadas.
+
+[faq_logs_seguranca]
+Quais logs de segurança estão disponíveis?
+O lojista possui acesso a Audit Log com registros de IP, alterações de senha, geração de chaves de API e solicitações de saque.
+
+[faq_perfis_acesso]
+É possível criar diferentes níveis de acesso para a equipe?
+Sim.
+Admin: acesso total.
+Financeiro: visualiza extratos e solicita saques.
+Operacional/Suporte: consulta status das transações.
+
+[faq_sla_suporte]
+Qual o SLA de suporte para lojistas?
+Oferecemos suporte via canal exclusivo (Slack ou WhatsApp) para lojistas High e Medium Risk.
+Incidentes críticos possuem tempo de resposta de até 30 minutos em horário comercial.
+
+[faq_gas_fee]
+Como são calculadas as taxas de rede (Gas Fees)?
+As taxas variam conforme congestionamento da rede.
+A Dashboard exibe estimativa em tempo real antes da confirmação do saque.
+
+[faq_saque_tempo_blockchain]
+Qual o tempo de liquidação do saque para a wallet?
+O envio para a blockchain é realizado no ato da solicitação de saque na Dashboard.
+O tempo médio para confirmação e chegada na carteira de destino é inferior a 5 minutos, dependendo da rede.
+
+[faq_lentidao_blockchain]
+O que ocorre em caso de lentidão na rede blockchain?
+Utilizamos redes de alta performance que raramente congestionam.
+Caso exista lentidão global na rede escolhida, o status pode ser acompanhado pelo Hash da transação disponível na Dashboard.
+
+[faq_valor_divergente_pix]
+O que acontece se o cliente pagar um valor diferente (maior ou menor) do que o estipulado no QR Code PIX?
+A NoxPay utiliza QR Codes Dinâmicos onde o valor é imutável.
+O aplicativo bancário do usuário não permite editar o valor a ser pago, impedindo pagamento maior ou menor na origem.
+
+[processo_onramp_definicao_detalhada]
+O que é o processo Onramp (detalhado) e como ele liquida?
+Onramp é entrada via PIX (BRL) e saída em cripto, sem liquidação imediata.
+Ao usar o parâmetro "onramp" no POST /link, ao final do processo o valor convertido (e eventuais taxas cobradas do cliente) fica disponível como saldo na NoxPay.
+Esse saldo pode ser sacado depois via Dashboard, conforme conveniência.
+
+[processo_onramp_telas_criticas]
+Quais telas do Onramp são obrigatórias para manter o fluxo funcionando?
+É crucial manter o checkout disponível nas etapas em que o usuário pode precisar agir.
+Telas críticas:
+- Cotação (Quoting)
+- Depósito via PIX
+- Validação de identidade (ID validation), quando aplicável
+Se essas telas não forem exibidas, o fluxo pode ser interrompido.
+
+[processo_onramp_fluxo_financeiro_macro]
+Como funciona o fluxo financeiro do Onramp ao longo das etapas?
+- Até o depósito via PIX: não há movimentação para o merchant.
+- Após o pagamento: o BRL é creditado no saldo do cliente na Nox (ainda não significa valor disponível pro merchant).
+- Após KYC/antifraude (se necessário): os valores seguem no saldo do cliente até a conversão.
+- Na conversão: BRL do cliente vira cripto e é transferido para a conta do merchant na Nox; taxas do merchant (se configuradas) também são creditadas; taxas da NoxPay são descontadas nesse momento.
+- Em caso de cancelamento: inicia fluxo de reembolso; no fim, o BRL é devolvido via PIX e nenhuma taxa é coletada (nem merchant nem Nox) quando termina em reembolso.
+
+[processo_offramp_definicao_detalhada]
+O que é o processo Offramp (detalhado) e qual a condição de falha?
+Offramp é saída: entrada de cripto e saída em BRL via PIX, liquidada a partir do saldo em cripto do merchant.
+Ao usar "offramp" no POST /link, o checkout coleta dados e processa o PIX de saída financiado pelo saldo do merchant.
+O processo falha se o saldo em cripto do merchant não for suficiente para cobrir o valor da transação.
+
+[processo_offramp_regra_cpf_pix]
+Qual regra crítica existe no Offramp sobre CPF/CNPJ e titularidade da chave PIX?
+O PIX de saída só deve ser processado se o CPF/CNPJ informado corresponder ao titular da conta bancária vinculada à chave PIX.
+
+[processo_offramp_telas_criticas]
+Quais telas do Offramp são obrigatórias para manter o fluxo funcionando?
+É crucial manter o checkout disponível nas telas em que o usuário precisa agir.
+Telas críticas:
+- Cotação (Quoting)
+- Autoidentificação KYC e formulário de chave PIX
+- Validação de identidade (ID validation), quando aplicável
+- Tela de depósito de cripto
+A não exibição dessas telas pode interromper o fluxo.
+
+[processo_onramp_instant_definicao]
+O que é o Onramp Instant e qual a recomendação de rede?
+Onramp Instant é entrada via PIX (BRL) e saída em cripto com liquidação imediata.
+Ao usar "onramp-instant" no POST /link, a cripto é enviada imediatamente para a carteira informada ao final do processo.
+Esse fluxo envolve taxas de rede (Network Fees). Se o template não repassar ao cliente, elas são descontadas do saldo do merchant.
+Recomendação: preferir redes mais baratas para evitar custo excessivo.
+
+[processo_onramp_instant_saque_cripto]
+Como funciona o “Processamento do Saque de Criptomoeda” no Onramp Instant?
+Na etapa de saque, a transação de cripto é enviada para a carteira definida na criação do checkout.
+O valor é bloqueado no saldo para realizar o saque, incluindo taxas de rede.
+Se falhar (rede/endereço incompatível ou outro motivo), o saldo é desbloqueado e a transação fica suspensa.
+O merchant pode solicitar saque manual pelo Dashboard ou acionar o time para ajustar e reprocessar.
+
+[processo_offramp_instant_definicao]
+O que é o Offramp Instant e como funciona o depósito via checkout?
+Offramp Instant é saída: entrada de cripto e saída em BRL via PIX, onde o depósito de cripto ocorre no próprio checkout.
+Ao usar "offramp-instant" no POST /link, o checkout solicita depósito de cripto para que o PIX seja processado.
+Esse fluxo pode ser configurado no Template para ocultar o endereço de depósito do cliente; nesse caso, endereço e valor são enviados via webhook.
+
+[processo_offramp_instant_valor_exato_deposito]
+Qual é a regra do valor exato de depósito no Offramp Instant?
+O valor depositado deve corresponder exatamente ao EXACT_deposit_amount enviado no webhook (ou ao valor exibido na tela).
+Valores divergentes não são reconhecidos automaticamente.
+Nessa situação, é necessário acionar o time da NoxPay para prosseguir.
+
+[faq_quando_usar_cada_fluxo]
+Qual fluxo devo usar em cada situação?
+Onramp:
+Adicionar saldo em criptomoeda para uma plataforma ou usuário utilizando PIX.
+
+Onramp Instant:
+Entregar criptomoeda diretamente na carteira externa do usuário após o pagamento via PIX.
+
+Offramp:
+Realizar pagamentos em BRL a partir de criptomoedas já disponíveis no saldo Nox (ex.: folha de pagamento, saques).
+
+Offramp Instant:
+Permitir que usuários vendam suas criptomoedas e recebam BRL via PIX, utilizando um endereço único de depósito.
+
+[faq_jornada_checkout_padrao]
+Como funciona a jornada padrão do checkout?
+Para fluxos onramp e onramp instant, o usuário percorre:
+- Início: clique em “Pagar com PIX / NoxPay”
+- Identificação: preenchimento de nome completo e CPF (deve corresponder ao titular da chave PIX)
+- Cotação: exibição de valores, taxa de câmbio e taxas aplicáveis
+- Pagamento via PIX: QR Code e opção copia e cola
+- Tela de sucesso: resumo da operação e return_url
+- Webhook: envio do status final ao merchant
+
+Nos fluxos de offramp, podem existir etapas adicionais como formulário de chave PIX ou depósito de criptomoeda.
+
+[faq_diferenca_fluxos_offramp]
+O que muda nos fluxos Offramp e Offramp Instant?
+Offramp:
+- Usuário informa nome, CPF e chave PIX
+- Confirma valor em BRL
+- Aguarda pagamento via PIX realizado pela Nox
+
+Offramp Instant:
+- Visualiza endereço de depósito
+- Visualiza rede suportada
+- Visualiza valor EXATO de criptomoeda a ser enviado
+Após confirmação on-chain do valor correto, a Nox executa o pagamento via PIX e exibe a tela de sucesso.
+
+[faq_status_substatus_definicao]
+O que são status e substatus?
+Cada transação possui dois níveis:
+Status: etapa principal do fluxo (ex.: quoting, pix_deposit, crypto_withdrawal, client_side_success).
+Substatus: detalhamento da etapa (ex.: INITIAL, QRCODE, DONE, ERROR, EXPIRED).
+
+Essas informações estão disponíveis no endpoint GET /checkout/{end2end} e nos webhooks.
+
+[faq_significado_etapas_status]
+O que cada etapa principal de status representa?
+quoting — Visualização/aceite da cotação
+kyc_validation — Coleta de CPF/PIX
+id_validation — Validação de documento e selfie
+pix_deposit — Aguardando pagamento via PIX
+pix_withdrawal — Processamento de saída em BRL via PIX
+crypto_deposit — Aguardando depósito de criptomoeda
+crypto_withdrawal — Envio de criptomoeda
+swap_fiat_for_crypto / swap_crypto_for_fiat — Conversão entre FIAT e cripto
+client_side_success — Tela final de conclusão
+
+[faq_quando_pagamento_finalizado]
+Quando devo considerar um pagamento como finalizado?
+Um pagamento pode ser tratado como finalizado quando:
+- status = client_side_success e substatus = INITIAL, ou
+- A última etapa crítica (pix_withdrawal ou crypto_withdrawal) estiver com substatus = DONE.
+
+Merchants normalmente mapeiam esses estados para:
+PENDING
+COMPLETED
+FAILED
+
+[faq_conteudo_webhooks]
+Quais informações os webhooks incluem?
+Os webhooks contêm:
+- amount_from e amount_to
+- currency_from e currency_to
+- Taxas (merchant, NoxPay e rede)
+- Timestamps e expiração
+- CPF/CNPJ
+- Endereço de depósito e EXACT_deposit_amount (offramp instant)
+- txHash, wallet e rede
+- status e substatus
+- Endpoint de webhook
+
+Esses dados permitem auditoria, conciliação e automações.
+
+[faq_expiracao_transacao]
+Por quanto tempo uma cotação permanece válida?
+Cada transação possui um timestamp de expiração.
+Após o vencimento:
+- Nenhuma liquidação é realizada
+- O status é atualizado para EXPIRED
+
+[faq_substatus_divergent]
+O que é um pagamento PIX com substatus DIVERGENT?
+O substatus DIVERGENT ocorre quando o titular da chave PIX não corresponde ao CPF/CNPJ registrado.
+Nesse caso, o pagamento é interrompido.

@@ -1,0 +1,161 @@
+[faq_tempo_biometria]
+Quanto tempo o usuário tem para concluir a biometria facial?
+Caso o motor de risco solicite biometria, o usuário possui até 10 minutos para concluir o processo.
+Esse prazo acompanha a validade do QR Code PIX.
+Se o pagamento ocorrer mas a biometria não for concluída dentro do prazo, o valor é estornado automaticamente.
+
+[faq_med]
+Como a NoxPay lida com o MED (Mecanismo Especial de Devolução)?
+Possuímos equipe de Compliance dedicada.
+Caso o banco solicite devolução por suspeita de fraude, analisamos logs e biometria.
+Se a fraude for confirmada antes do saque, o valor pode ser retido para devolução.
+
+[faq_biometria_todas_vendas]
+A biometria é solicitada em todas as vendas?
+Não. O motor de risco utiliza IA para avaliar cada transação.
+A biometria é acionada apenas quando padrões suspeitos são identificados.
+
+[faq_analise_manual]
+O que significa status "em análise manual"?
+Quando o motor de risco identifica necessidade de verificação adicional, a transação entra em análise.
+Após validação pelo Compliance, o status final é enviado via Webhook.
+
+[faq_limite_por_cpf]
+Existe limite máximo por transação via PIX (CPF)?
+O limite depende do motor de risco e do limite bancário do usuário.
+Transações atípicas podem exigir verificações adicionais.
+
+[faq_cpf_diferente]
+O que acontece se o CPF pagador for diferente do CPF cadastrado no site?
+A NoxPay captura o CPF do pagador via Banco Central.
+O lojista recebe essa informação via Webhook e pode decidir aceitar ou recusar pagamentos de terceiros.
+
+[kyc_visao_geral]
+O que é o KYC na NoxPay?
+O KYC (Know Your Customer) é obrigatório na NoxPay.
+O processo é integrado ao checkout e tem como objetivos:
+- Cumprimento regulatório
+- Prevenção a fraudes
+
+[kyc_caracteristicas_fluxo]
+Quais são as características do fluxo de KYC?
+O processo é iniciado diretamente no checkout.
+Pode redirecionar para página externa para conformidade com LGPD.
+Duração média: 5 minutos.
+Não interrompe a experiência de compra quando concluído corretamente.
+
+[kyc_documentos_pf]
+Quais documentos são aceitos para KYC de Pessoa Física?
+Documentos aceitos:
+- CNH
+- RG
+- Carteira Profissional
+- CRNM
+- CIN
+É obrigatória selfie com verificação de liveness.
+
+[kyc_tiers_pf]
+Como funcionam os Tiers de KYC para Pessoa Física (CPF)?
+Os limites são aplicados por CPF a cada 30 dias.
+
+Tier 1:
+Limite: R$ 10.000
+Requisitos:
+- Nome e CPF
+- Validação automática via metadados do PIX ou formulário no checkout
+
+Tier 2:
+Limite: R$ 150.000
+Requisitos:
+- Documento
+- Selfie com liveness
+
+Tier 3:
+Limite: Customizado
+Requisitos:
+- Declaração de capacidade financeira
+- Análise manual em back-office
+
+[kyc_fluxo_pf]
+Como funciona o fluxo de KYC para CPF?
+No primeiro uso, o cliente entra automaticamente no Tier 1.
+O Tier 1 é validado automaticamente via PIX ou por formulário.
+Ao atingir o limite do Tier 1, o cliente é solicitado a realizar KYC completo.
+Após concluir o Tier 2, o limite passa para R$ 150.000.
+Upgrades acima do Tier 2 são realizados manualmente pela equipe NoxPay.
+
+[kyc_recomendacao_volumes_altos]
+Qual a recomendação para usuários com volumes elevados?
+Para volumes acima do Tier 2, recomenda-se realizar pré-registro com a equipe NoxPay.
+Isso evita bloqueios durante o fluxo operacional.
+
+[kyc_tiers_pj]
+Como funcionam os Tiers de KYC para Empresas (CNPJ)?
+Os limites são aplicados por CNPJ a cada 30 dias.
+
+Tier 1:
+Limite: R$ 10.000
+Requisitos:
+- Identificação básica
+
+Tier 2:
+Limite: R$ 150.000
+Requisitos:
+- Documento
+- Selfie com liveness
+
+Tier 3:
+Limite: Customizado
+Requisitos:
+- Avaliação financeira
+- Análise manual em back-office
+
+[kyc_ubo_empresas]
+Como funciona a identificação de UBO para empresas?
+É obrigatório identificar ao menos um UBO (Ultimate Beneficial Owner).
+O sistema:
+- Lista os UBOs vinculados ao CNPJ
+- Permite selecionar quem fará a verificação
+
+Se o UBO já possuir Tier 1 ativo, o processo tende a ser mais rápido, geralmente exigindo apenas selfie com liveness.
+
+[antifraude_funcionamento]
+Como funciona o sistema antifraude da NoxPay?
+Todas as transações passam pelo motor de risco da NoxPay.
+Uma transação pode ser sinalizada independentemente do Tier do usuário.
+
+[antifraude_flag]
+O que acontece quando uma transação é sinalizada como fraude?
+O CPF ou CNPJ é marcado como potencial fraude.
+A marcação permanece ativa até nova validação.
+
+[antifraude_remocao_flag]
+Como remover uma flag de fraude?
+Usuário Tier 1:
+Deve realizar validação completa equivalente ao Tier 2.
+
+Usuário Tier 2 ou superior:
+Deve realizar nova selfie com liveness.
+
+Empresas:
+Devem validar o UBO.
+
+[antifraude_observacao]
+Os critérios de antifraude podem ser configurados pelo merchant?
+Não.
+Os critérios de classificação como fraude são definidos exclusivamente pelo motor de risco da NoxPay e não são configuráveis pelo merchant.
+
+[faq_tempo_validacao_id]
+Qual o tempo estimado para análise da validação de identidade do usuário?
+Após o reconhecimento facial realizado pelo usuário, a validação normalmente ocorre em menos de 2 minutos.
+
+Em casos onde o sistema identifica necessidade de análise adicional, a validação pode entrar em revisão manual e levar mais tempo.
+
+[faq_pf_onboarding]
+É possível fazer cadastro de Pessoa Física pelo link de onboarding?
+Não.
+
+O onboarding da NoxPay é destinado apenas para empresas (CNPJ) que desejam operar como merchants na plataforma.
+
+Usuários pessoa física não podem realizar cadastro direto na NoxPay.
+Clientes finais podem realizar transações dentro do fluxo do merchant integrado, passando pelo processo de identificação e KYC durante a operação.

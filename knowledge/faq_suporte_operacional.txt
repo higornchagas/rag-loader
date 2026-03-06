@@ -1,0 +1,99 @@
+[suporte_sla_wallet_saque]
+Qual o SLA para aprovação de wallets e saques via Dashboard Crossramp?
+O SLA para aprovação de wallets e processamento de saques é de até 24 horas, considerando dias úteis e não úteis.
+
+[suporte_diferenca_ledger_fireblocks]
+Qual a diferença entre Ledger e Fireblocks?
+Ledger é o registro contábil interno (quem deve a quem).
+Fireblocks é a custódia real dos ativos (onde o dinheiro está guardado e de onde ele sai).
+Se houver saldo na Ledger mas não houver liquidez na Fireblocks, a transação pode falhar por falta de liquidez.
+
+[suporte_erro_liquidez]
+O que significa erro de liquidez?
+Ocorre quando a operação é autorizada no sistema (Ledger), mas não há saldo disponível na Fireblocks no momento da execução.
+A transação entra em falha por indisponibilidade de fundos reais na carteira operacional.
+
+[suporte_valida_id_pending]
+Por que um usuário pode cair em valida_id_pending mesmo sem atingir o mínimo de KYC?
+O antifraude pode ser ativado se:
+- A transação for maior que R$5.000,00;
+- Houver duas transações do mesmo CPF em curto intervalo (aproximadamente 5 minutos).
+
+[suporte_reabrir_kyc]
+Se o usuário saiu da página durante o KYC, ele pode retornar?
+Sim, se ele não tiver cancelado a operação, pode reabrir o link e continuar.
+Caso tenha cancelado ou expirado, é necessário estornar e gerar novo QR Code.
+
+[suporte_saque_fireblocks_procedimento]
+O procedimento muda conforme o status do component.saque_cripto_fireblocks_to_merchant?
+Sim.
+Se estiver Pending, aguardar assinatura interna.
+Se estiver Fail, adicionar wallet na whitelist, processar e remover da whitelist.
+Se estiver Error, verificar saldo e reprocessar.
+
+[suporte_saldo_bloqueado]
+O que fazer quando o saldo está como “Bloqueado”?
+Solicitar ao Leonardo ou Gustavo que deem sequência junto ao time de TI para destravar a transação.
+
+[suporte_solscan]
+Como consultar uma transação no Solscan?
+1. Inserir o Hash ou Wallet no campo de busca.
+2. Acessar a aba “Transfers” para visualizar movimentações.
+
+[suporte_cs_autorizacao]
+O que a equipe de CS está autorizada a fazer no Crossramp?
+Consultar informações, identificar onde a transação parou e encaminhar relatório detalhado ao time responsável solicitando continuidade ou estorno.
+
+[suporte_status_jaci]
+Quais são os principais status do Jaci?
+Returned = Estornado.
+Waiting Payment = Verificar pagamento no banco ou solicitar comprovante.
+Paid = Pago, segue fluxo inicial do Crossramp.
+
+[suporte_component_valida_id_netrin]
+Como interpretar status do component.valida_id_netrin?
+Returned = Estornado.
+Pending = Em processamento (aguardar até 10 minutos).
+Done = Concluído (status temporário).
+Error = Bug, necessário estorno.
+Cancelled = Usuário cancelou a operação.
+
+[suporte_transacao_travada_paid_depositpix]
+O que fazer quando Jaci está PAID mas o componente permanece em depositpix?
+Significa que o usuário pagou e fechou a tela antes da conclusão.
+É necessário abrir manualmente o checkout utilizando o End2End correto para finalizar o fluxo.
+
+[suporte_uncompliant_crossramp]
+O que significa Crossborder UNCOMPLIANT?
+Indica que a transação foi marcada como não conforme após o pagamento.
+Deve ser analisada pelo time responsável para validação ou estorno.
+
+[suporte_falha_saque_pix]
+O que fazer em caso de falha no saque PIX?
+Quando Jaci estiver FAIL e o componente withdrawpix estiver ERROR, é necessário realizar estorno para saldo disponível do merchant.
+
+[suporte_waiting_transfer]
+O que significa WAITING_TRANSFER no saque cripto?
+Indica que a transação foi iniciada e está aguardando processamento ou confirmação na rede.
+
+[suporte_canais_slack_busca]
+O que é o canal Buscador de Transação?
+Permite buscar transações por merchant, CPF ou NoxID.
+
+[suporte_canal_ledger]
+O que é o canal Ledger?
+Mostra divergências entre saldo Fireblocks e Ledger.
+Se houver saldo em um e não no outro, a operação pode travar.
+
+[suporte_canal_gestao_conversao]
+O que é o canal Gestão de Conversão?
+Notifica falhas após início da transação no Crossramp.
+Se a operação começou e não finalizou no tempo esperado, haverá alerta.
+
+[suporte_gateway_crossramp]
+O que é o canal Gateway-Crossramp?
+Notifica ações manuais necessárias na nova dashboard do Gateway.
+
+[suporte_resumo_operacional]
+O que é o Resumo Operacional / Resumo-CS?
+Relatório consolidado com saldo bancário, volume por merchant, taxas de conversão, risco operacional e movimentações.

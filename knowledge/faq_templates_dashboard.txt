@@ -1,0 +1,168 @@
+[templates_visao_geral]
+O que são Templates na NoxPay?
+Templates definem o visual e parte da lógica do checkout.
+Permitem alterar configurações do fluxo sem necessidade de modificar a integração via API.
+São criados e gerenciados no Dashboard: https://painel.noxpay.io/
+
+[templates_criacao_dashboard]
+Onde os Templates são criados?
+Os Templates são criados e configurados diretamente no Dashboard da NoxPay.
+Após criação, o nome do template é utilizado na API para geração de links de pagamento.
+
+[templates_nome]
+O que é o campo "Nome" do Template?
+É o identificador do template utilizado na API.
+É enviado na rota POST /link.
+Pode conter espaços e caracteres especiais.
+Recomenda-se utilizar nomes simples para facilitar a integração.
+
+[templates_moeda_contrapartida]
+O que é a Moeda de Contra Partida no Template?
+É a criptomoeda utilizada em operações de onramp e offramp.
+Define qual ativo será usado na conversão.
+
+[templates_moedas_suportadas]
+Quais moedas e redes são suportadas como contraparte?
+USDT:
+- ERC-20
+- SOL
+- TRX
+- AVAX
+- TON
+
+USDC:
+- ERC-20
+- SOL
+- AVAX
+
+Bitcoin:
+- SegWit
+
+[templates_unidades_minimas_api]
+Como a API representa valores das criptomoedas?
+A API e os webhooks utilizam unidades mínimas:
+- Stablecoins (USDT/USDC): cents
+- Bitcoin: satoshis
+
+[templates_cobrar_taxa_cliente]
+O que significa "Cobrar Taxa do Cliente Final"?
+Quando ativado, as taxas da NoxPay somadas às taxas do merchant são adicionadas ao quote.
+O cliente visualiza um valor final maior no checkout.
+
+[templates_cobrar_taxa_rede_cliente]
+O que significa "Cobrar Taxa de Rede do Cliente"?
+Quando ativado, a taxa da rede blockchain é adicionada ao quote.
+O cliente final paga essa taxa junto com o valor da transação.
+
+[templates_mostrar_wallet_deposito]
+O que significa "Mostrar Wallet de Depósito"?
+Quando ativado, o endereço de depósito aparece no checkout.
+É utilizado principalmente em operações de offramp.
+Pode ser desativado caso o merchant gerencie os depósitos externamente.
+
+[templates_split_taxa_fixa]
+O que é Split de Taxas com valor fixo?
+É uma taxa fixa cobrada do cliente.
+Pode ser configurada em:
+- USD Stablecoin
+- BTC
+O valor arrecadado é creditado no saldo do merchant.
+
+[templates_split_taxa_percentual]
+O que é Split de Taxas percentual?
+É uma taxa percentual aplicada sobre o quote do cliente.
+O valor arrecadado é creditado no saldo do merchant.
+
+[templates_cor_botao]
+Como funciona a configuração da cor do botão?
+Define a cor dos botões principais do checkout.
+O formato obrigatório é HEX.
+O uso de HEX evita inconsistências visuais.
+
+[templates_logo_empresa]
+Quais são as regras para o logo da empresa no checkout?
+O logo é exibido no checkout.
+Proporção recomendada: entre 1:1 e 1:3.
+Proporções fora desse padrão podem causar quebra de layout.
+
+[templates_erro_template_nao_encontrado]
+O que fazer quando a API retorna erro de template não encontrado?
+1. Verificar se o nome do template enviado na rota POST /link está exatamente igual ao configurado no Dashboard.
+2. Confirmar se não há espaços extras no início ou final do nome.
+3. Validar se o template pertence ao ambiente correto (Sandbox ou Produção).
+4. Se persistir, escalar para o time técnico.
+
+[templates_erro_moeda_invalida]
+O que fazer quando a API retorna erro de moeda ou rede inválida?
+1. Confirmar se a moeda de contraparte está habilitada no Template.
+2. Verificar se a rede selecionada é compatível com o ativo.
+3. Validar se o ambiente suporta aquela moeda.
+4. Caso esteja tudo correto, verificar logs da requisição.
+
+[templates_quote_divergente]
+O que fazer quando o valor exibido no checkout está diferente do esperado pelo merchant?
+1. Verificar se está habilitada a opção "Cobrar Taxa do Cliente Final".
+2. Verificar se está habilitada a opção "Cobrar Taxa de Rede do Cliente".
+3. Confirmar se existe Split de Taxa (fixo ou percentual) configurado.
+4. Recalcular o valor considerando taxas aplicadas.
+
+[templates_erro_split]
+O que fazer quando o Split de Taxas não está sendo creditado?
+1. Confirmar se o Split está ativo no Template correto.
+2. Verificar se o Template utilizado na API é o mesmo configurado.
+3. Validar nos logs se o valor do split foi aplicado no quote.
+4. Se não houver registro, escalar para análise técnica.
+
+[templates_wallet_nao_exibida]
+O que fazer quando a wallet de depósito não aparece no checkout?
+1. Confirmar se a opção "Mostrar Wallet de Depósito" está ativada no Template.
+2. Verificar se a operação é compatível com exibição de wallet (ex: offramp).
+3. Testar com outro template para validar comportamento.
+
+[templates_erro_unidades_minimas]
+O que fazer quando o valor enviado na API está incorreto?
+1. Confirmar se o valor foi enviado em unidade mínima.
+   - Stablecoins devem ser enviadas em cents.
+   - Bitcoin deve ser enviado em satoshis.
+2. Verificar se houve conversão duplicada no backend do merchant.
+3. Testar manualmente a requisição com valor fixo.
+
+[templates_erro_cor_layout]
+O que fazer quando o layout do checkout está quebrado?
+1. Verificar se a cor do botão está em formato HEX válido.
+2. Validar proporção do logo (entre 1:1 e 1:3).
+3. Testar com logo padrão para isolar problema.
+
+[templates_template_errado]
+O que fazer quando o merchant afirma que o checkout está usando configuração errada?
+1. Confirmar qual nome de template está sendo enviado na API.
+2. Validar no Dashboard se aquele template está ativo.
+3. Confirmar se não há cache no sistema do merchant.
+4. Gerar novo link para teste.
+
+[templates_procedimento_padrao_api]
+Qual o procedimento padrão ao investigar erro relacionado a Template?
+1. Coletar payload enviado pelo merchant.
+2. Identificar nome do template utilizado.
+3. Validar configurações no Dashboard.
+4. Conferir logs da requisição.
+5. Reproduzir erro em Sandbox.
+6. Escalar apenas após confirmação técnica.
+
+[templates_crossramp_sla]
+Como funcionam os prazos e SLAs da Crossramp?
+Os prazos operacionais seguem os seguintes limites:
+
+Aprovação de novas wallets:
+Prazo médio de 24 horas, com prazo máximo de 48 horas.
+
+Aprovação de saques:
+Prazo máximo de 24 horas.
+
+O grupo “Movimentações Financeiras” deve ser acionado apenas quando o prazo ultrapassar o SLA combinado:
++48h para wallet
++24h para saque
+
+[templates_estorno_valida_id_netrin]
+Qual é o prazo de estorno do Valida_ID_Netrin?
+O estorno deve ocorrer em até 24 horas úteis
