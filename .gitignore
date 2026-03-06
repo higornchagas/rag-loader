@@ -145,3 +145,6 @@ vite.config.ts.timestamp-*
 
 # Chunk json
 chunks.json
+
+#vscode
+.vscode
