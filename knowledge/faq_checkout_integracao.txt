@@ -6,12 +6,25 @@ Sim. Existem dois modelos:
 
 [faq_sandbox]
 Existe ambiente Sandbox para testes?
-Sim. Disponibilizamos ambiente Sandbox para simulação de pagamentos, falhas e biometria antes da entrada em produção.
+Não. No momento não disponibilizamos ambiente Sandbox.
+Os testes devem ser realizados diretamente em produção com valores reais.
 
 [faq_webhook_assinatura]
-Como é garantida a segurança dos Webhooks?
-Cada webhook enviado contém assinatura digital (HMAC) no cabeçalho.
-O lojista deve validar a assinatura utilizando sua Secret Key antes de processar o evento.
+Como validar a assinatura dos Webhooks da NoxPay?
+Os webhooks enviados pela NoxPay contêm uma assinatura digital no header x-noxpay-sign (SHA256 + base64).
+
+Para orientar o cliente na validação:
+1. O cliente deve pegar o body raw do webhook exatamente como recebido, sem modificações
+2. Concatenar o webhook_secret com o body_raw
+3. Aplicar SHA256 e encodar em base64
+4. Comparar o resultado com o valor do header x-noxpay-sign
+
+O webhook_secret é gerado pela NoxPay e deve ser fornecido ao cliente durante o onboarding.
+
+Documentação completa com exemplos em Python e Golang:
+https://github.com/NoxPay/apidocs/blob/master/webhook_signature.org
+
+Obs: o header X-Signature utiliza HMAC. A documentação de validação para esse modelo ainda não está disponível.
 
 [faq_plugins_ecommerce]
 Existem plugins prontos para e-commerce?
